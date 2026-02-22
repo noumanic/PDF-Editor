@@ -1,0 +1,379 @@
+/* ─── Global CSS Variables & Reset ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Light palette */
+  --bg: #f0f4ff;
+  --bg2: #e8edf8;
+  --glass: rgba(255, 255, 255, 0.75);
+  --gb: rgba(99, 102, 241, 0.15);
+  --acc: #6366f1;
+  --acc2: #8b5cf6;
+  --cyan: #0ea5e9;
+  --em: #10b981;
+  --tx: #1e1b4b;
+  --txm: #6b6f9a;
+  --card: #ffffff;
+  --glow: rgba(99, 102, 241, 0.25);
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow: 0 4px 24px rgba(99, 102, 241, 0.10);
+  --shadow-lg: 0 12px 48px rgba(99, 102, 241, 0.18);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--tx);
+}
+
+/* ─── Scrollbars ─── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(99, 102, 241, 0.04);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.22);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.40);
+}
+
+/* ─── Keyframes ─── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(99, 102, 241, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 28px rgba(99, 102, 241, 0.18);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInL {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInR {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(110%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ─── Card / Glass ─── */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--gb);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--gb);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+
+/* ─── Buttons ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 13px;
+  border-radius: 9px;
+  border: 1px solid var(--gb);
+  background: var(--card);
+  color: var(--tx);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.18s var(--ease);
+  white-space: nowrap;
+  box-shadow: 0 1px 4px rgba(99, 102, 241, 0.08);
+}
+
+.btn:hover:not(:disabled) {
+  background: rgba(99, 102, 241, 0.08);
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.10);
+  transform: translateY(-1px);
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.97) translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.btn-prim {
+  background: linear-gradient(135deg, var(--acc), var(--acc2));
+  border: none;
+  font-weight: 600;
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(99, 102, 241, 0.30);
+}
+
+.btn-prim:hover:not(:disabled) {
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.40);
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  border: none;
+  font-weight: 600;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25);
+}
+
+.btn-danger:hover:not(:disabled) {
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.38);
+  transform: translateY(-1px);
+}
+
+/* ─── Tool Buttons ─── */
+.tool-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--txm);
+  cursor: pointer;
+  transition: all 0.18s var(--ease);
+  position: relative;
+}
+
+.tool-btn:hover {
+  background: rgba(99, 102, 241, 0.08);
+  color: var(--acc);
+}
+
+.tool-btn.act {
+  background: rgba(99, 102, 241, 0.12);
+  color: var(--acc);
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.12);
+}
+
+/* ─── Thumbnails ─── */
+.thumb {
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.18s var(--ease);
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.08);
+}
+
+.thumb:hover {
+  border-color: rgba(99, 102, 241, 0.35);
+  transform: scale(1.02);
+}
+
+.thumb.act {
+  border-color: var(--acc);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* ─── Form Controls ─── */
+input[type=range] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(99, 102, 241, 0.15);
+  outline: none;
+  cursor: pointer;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--acc);
+  box-shadow: 0 0 6px rgba(99, 102, 241, 0.4);
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Shared styled input / select */
+.form-field {
+  background: #f8f9ff;
+  border: 1.5px solid rgba(99, 102, 241, 0.18);
+  border-radius: 7px;
+  color: var(--tx);
+  padding: 5px 8px;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.form-field:focus {
+  border-color: var(--acc);
+}
+
+select.form-field {
+  cursor: pointer;
+}
+
+/* ─── Tooltip ─── */
+.tooltip {
+  position: absolute;
+  left: calc(100% + 9px);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 5px 10px;
+  border-radius: 7px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s 0.25s;
+  z-index: 200;
+  background: #1e1b4b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.tool-btn:hover .tooltip {
+  opacity: 1;
+}
+
+/* Divider */
+.nav-sep {
+  width: 1px;
+  height: 22px;
+  background: var(--gb);
+  margin: 0 2px;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .hide-m {
+    display: none !important;
+  }
+
+  .mob-bar {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mob-bar {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hide-t {
+    display: none !important;
+  }
+}
