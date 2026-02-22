@@ -1,5 +1,9 @@
 # PDF Editor Free 📄✨
 
+<p align="center">
+  <img src="images/preview.png" alt="PDF Editor Free Preview" width="100%" />
+</p>
+
 A fast, production-ready, client-side-only PDF editor built with **React**, **Vite**, **PDF.js**, and **pdf-lib**. 
 
 ## Features
@@ -10,6 +14,7 @@ A fast, production-ready, client-side-only PDF editor built with **React**, **Vi
 - **Rotate Pages:** Quickly rotate the visual view 90° left or right.
 - **Undo / Redo:** Robust stack with 50-step memory (Ctrl+Z / Ctrl+Y).
 - **Beautiful Light Theme:** Modern, crisp interface with indigo and glassmorphism accents.
+- **Mobile Responsive:** Full-screen mobile preview drawer and dedicated scrollable touch toolbars.
 - **Instant Export:** Download the modified PDF instantly without server roundtrips.
 
 ## Tech Stack
