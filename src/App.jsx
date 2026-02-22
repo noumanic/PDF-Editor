@@ -19,7 +19,7 @@ export default function App() {
     /* ── View state ── */
     const [zoom, setZoom] = useState(1.0);
     const [rotation, setRotation] = useState(0); // overall visual rotation
-    const [sideOpen, setSideOpen] = useState(true);
+    const [sideOpen, setSideOpen] = useState(typeof window !== 'undefined' ? window.innerWidth > 768 : true);
     const [toast, setToast] = useState(null);
     const [rendering, setRendering] = useState(false);
     const [pageWH, setPageWH] = useState({ w: 0, h: 0 });
@@ -65,7 +65,7 @@ export default function App() {
         setRotation(0);
         resetAnns();
         setSelIdx(null);
-        setZoom(1.0);
+        setZoom(window.innerWidth < 768 ? 0.55 : 1.0);
     }, [resetAnns]);
 
     const openNew = useCallback(() => {
@@ -178,20 +178,23 @@ export default function App() {
                 onOpenNew={openNew}
             />
 
-            <div style={{ flex: 1, display: 'flex', overflow: 'hidden', position: 'relative' }}>
+            <div style={{ flex: 1, display: 'flex', overflowX: 'auto', overflowY: 'hidden', position: 'relative' }}>
                 {sideOpen && (
                     <Sidebar
                         pdfDoc={pdfDoc} totalPages={totalPages} currentPage={currentPage}
                         deletedPages={deletedPages}
                         rangeFrom={rangeFrom} rangeTo={rangeTo}
                         setRangeFrom={setRangeFrom} setRangeTo={setRangeTo}
-                        onPageClick={setCurrentPage}
+                        onPageClick={p => {
+                            setCurrentPage(p);
+                            if (window.innerWidth < 768) setSideOpen(false);
+                        }}
                         onDeletePage={deletePage}
                         onDeleteRange={deletePageRange}
                     />
                 )}
 
-                <div style={{ flex: 1, position: 'relative', display: 'flex', overflow: 'hidden' }}>
+                <div className="canvas-wrapper" style={{ flex: 1, position: 'relative', display: 'flex', overflow: 'hidden' }}>
                     <MainCanvas
                         pdfDoc={pdfDoc} currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage}
                         zoom={zoom} rotation={rotation}

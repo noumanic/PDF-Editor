@@ -31,78 +31,115 @@ export default function RightToolbar({ tool, setTool, opts, setOpts }) {
     const colorSet = tool === 'rectangle' ? RECT_COLORS : HL_COLORS;
 
     return (
-        <div style={{
-            position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)',
-            display: 'flex', flexDirection: 'column', gap: 6, zIndex: 40,
-            animation: 'slideInR 0.25s var(--ease)',
-        }} className="hide-m">
-
-            {/* Tool buttons */}
+        <>
+            {/* Desktop right sidebar */}
             <div style={{
-                background: '#ffffff', border: '1.5px solid rgba(99,102,241,0.13)',
-                borderRadius: 14, padding: 8, display: 'flex', flexDirection: 'column', gap: 4,
-                boxShadow: '0 4px 20px rgba(99,102,241,0.10)',
-            }}>
-                {TOOLS.map(({ key, Icon, label }) => (
-                    <button key={key}
-                        className={`tool-btn ${tool === key ? 'act' : ''}`}
-                        onClick={() => setTool(key)}
-                        aria-label={label} title={label}>
-                        <Icon />
-                        <span className="tooltip">{label}</span>
-                    </button>
-                ))}
-            </div>
-
-            {/* Options panel */}
-            {(showColors || showText) && (
+                position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)',
+                display: 'flex', flexDirection: 'column', gap: 6, zIndex: 40,
+                animation: 'slideInR 0.25s var(--ease)',
+            }} className="hide-m">
+                {/* Tool buttons */}
                 <div style={{
                     background: '#ffffff', border: '1.5px solid rgba(99,102,241,0.13)',
-                    borderRadius: 12, padding: '11px 10px',
-                    display: 'flex', flexDirection: 'column', gap: 9,
-                    boxShadow: '0 4px 20px rgba(99,102,241,0.10)', minWidth: 132,
+                    borderRadius: 14, padding: 8, display: 'flex', flexDirection: 'column', gap: 4,
+                    boxShadow: '0 4px 20px rgba(99,102,241,0.10)',
                 }}>
-                    {showColors && (
-                        <>
-                            <label style={{ fontSize: 10, color: '#6b6f9a', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Color</label>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
-                                {colorSet.map(({ v, l }) => (
-                                    <button key={v} title={l} onClick={() => setOpts(o => ({ ...o, color: v }))}
-                                        style={{
-                                            width: 24, height: 24, borderRadius: 7, background: v, border: 'none', cursor: 'pointer',
-                                            outline: opts.color === v ? '2.5px solid #6366f1' : '2px solid transparent',
-                                            outlineOffset: 2, transition: 'transform 0.15s',
-                                            boxShadow: '0 2px 6px rgba(0,0,0,0.12)',
-                                        }}
-                                        onMouseOver={e => (e.currentTarget.style.transform = 'scale(1.18)')}
-                                        onMouseOut={e => (e.currentTarget.style.transform = 'scale(1)')}
-                                    />
-                                ))}
-                            </div>
-                        </>
-                    )}
-
-                    {showText && (
-                        <>
-                            <label style={{ fontSize: 10, color: '#6b6f9a', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Font</label>
-                            <select value={opts.fontFamily} onChange={e => setOpts(o => ({ ...o, fontFamily: e.target.value }))}
-                                style={SELECT_STYLE}>
-                                {FONT_FAMILIES.map(f => <option key={f} value={f}>{f}</option>)}
-                            </select>
-
-                            <label style={{ fontSize: 10, color: '#6b6f9a', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Size</label>
-                            <select value={opts.fontSize} onChange={e => setOpts(o => ({ ...o, fontSize: +e.target.value }))}
-                                style={SELECT_STYLE}>
-                                {FONT_SIZES.map(s => <option key={s} value={s}>{s}px</option>)}
-                            </select>
-
-                            <label style={{ fontSize: 10, color: '#6b6f9a', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Text Color</label>
-                            <input type="color" value={opts.textColor} onChange={e => setOpts(o => ({ ...o, textColor: e.target.value }))}
-                                style={{ width: '100%', height: 32, borderRadius: 7, border: '1.5px solid rgba(99,102,241,0.2)', cursor: 'pointer', background: 'none', padding: 2 }} />
-                        </>
-                    )}
+                    {TOOLS.map(({ key, Icon, label }) => (
+                        <button key={key}
+                            className={`tool-btn ${tool === key ? 'act' : ''}`}
+                            onClick={() => setTool(key)}
+                            aria-label={label} title={label}>
+                            <Icon />
+                            <span className="tooltip">{label}</span>
+                        </button>
+                    ))}
                 </div>
-            )}
-        </div>
+
+                {/* Options panel */}
+                {(showColors || showText) && (
+                    <div style={{
+                        background: '#ffffff', border: '1.5px solid rgba(99,102,241,0.13)',
+                        borderRadius: 12, padding: '11px 10px',
+                        display: 'flex', flexDirection: 'column', gap: 9,
+                        boxShadow: '0 4px 20px rgba(99,102,241,0.10)', minWidth: 132,
+                    }}>
+                        {showColors && (
+                            <>
+                                <label style={{ fontSize: 10, color: '#6b6f9a', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Color</label>
+                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
+                                    {colorSet.map(({ v, l }) => (
+                                        <button key={v} title={l} onClick={() => setOpts(o => ({ ...o, color: v }))}
+                                            style={{
+                                                width: 24, height: 24, borderRadius: 7, background: v, border: 'none', cursor: 'pointer',
+                                                outline: opts.color === v ? '2.5px solid #6366f1' : '2px solid transparent',
+                                                outlineOffset: 2, transition: 'transform 0.15s',
+                                                boxShadow: '0 2px 6px rgba(0,0,0,0.12)',
+                                            }}
+                                        />
+                                    ))}
+                                </div>
+                            </>
+                        )}
+
+                        {showText && (
+                            <>
+                                <label style={{ fontSize: 10, color: '#6b6f9a', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Font</label>
+                                <select value={opts.fontFamily} onChange={e => setOpts(o => ({ ...o, fontFamily: e.target.value }))}
+                                    style={SELECT_STYLE}>
+                                    {FONT_FAMILIES.map(f => <option key={f} value={f}>{f}</option>)}
+                                </select>
+
+                                <label style={{ fontSize: 10, color: '#6b6f9a', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Size</label>
+                                <select value={opts.fontSize} onChange={e => setOpts(o => ({ ...o, fontSize: +e.target.value }))}
+                                    style={SELECT_STYLE}>
+                                    {FONT_SIZES.map(s => <option key={s} value={s}>{s}px</option>)}
+                                </select>
+
+                                <label style={{ fontSize: 10, color: '#6b6f9a', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Color</label>
+                                <input type="color" value={opts.textColor} onChange={e => setOpts(o => ({ ...o, textColor: e.target.value }))}
+                                    style={{ width: '100%', height: 32, borderRadius: 7, border: '1.5px solid rgba(99,102,241,0.2)', cursor: 'pointer', background: 'none', padding: 2 }} />
+                            </>
+                        )}
+                    </div>
+                )}
+            </div>
+
+            {/* Mobile bottom bar */}
+            <div className="mob-bottom-bar">
+                {TOOLS.map(({ key, Icon, label }) => (
+                    <button key={key + '-m'}
+                        className={`tool-btn ${tool === key ? 'act' : ''}`}
+                        onClick={() => setTool(key)}
+                        aria-label={label} title={label}
+                        style={{ flexShrink: 0 }}>
+                        <Icon />
+                    </button>
+                ))}
+
+                {/* Minimal mobile options panel */}
+                <div style={{ width: 1, height: 'auto', background: 'rgba(99,102,241,0.2)', margin: '0 4px', flexShrink: 0 }} />
+
+                {showColors && colorSet.map(({ v, l }) => (
+                    <button key={v + '-m'} title={l} onClick={() => setOpts(o => ({ ...o, color: v }))}
+                        style={{
+                            width: 32, height: 32, borderRadius: 9, background: v, border: 'none', cursor: 'pointer',
+                            outline: opts.color === v ? '2px solid #6366f1' : 'none',
+                            outlineOffset: 1, flexShrink: 0, marginTop: 6,
+                        }}
+                    />
+                ))}
+
+                {showText && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0, paddingRight: 10 }}>
+                        <select value={opts.fontSize} onChange={e => setOpts(o => ({ ...o, fontSize: +e.target.value }))}
+                            style={{ ...SELECT_STYLE, width: 'auto', padding: '4px 6px' }}>
+                            {FONT_SIZES.map(s => <option key={s} value={s}>{s}px</option>)}
+                        </select>
+                        <input type="color" value={opts.textColor} onChange={e => setOpts(o => ({ ...o, textColor: e.target.value }))}
+                            style={{ width: 32, height: 32, borderRadius: 7, border: '1px solid rgba(99,102,241,0.2)', cursor: 'pointer', padding: 2, background: 'none' }} />
+                    </div>
+                )}
+            </div>
+        </>
     );
 }

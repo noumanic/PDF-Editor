@@ -26,7 +26,7 @@ export default function Sidebar({
             padding: 10, display: 'flex', flexDirection: 'column',
             background: '#ffffff',
             animation: 'slideInL 0.25s var(--ease)',
-        }} className="hide-m">
+        }} className="app-sidebar">
 
             {/* ── Delete Range Panel ── */}
             <div style={{

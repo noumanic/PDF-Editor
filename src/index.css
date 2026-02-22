@@ -361,13 +361,40 @@ select.form-field {
     display: none !important;
   }
 
-  .mob-bar {
-    display: flex !important;
+  .mob-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border-top: 1.5px solid rgba(99, 102, 241, 0.13);
+    padding: 8px 12px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    box-shadow: 0 -4px 20px rgba(99, 102, 241, 0.08);
+    z-index: 100;
+  }
+
+  .canvas-wrapper {
+    padding-bottom: 60px;
+    /* Space for the bottom bar */
+  }
+
+  .app-sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100%;
+    z-index: 150;
+    box-shadow: none;
+    background: #f8f9ff;
   }
 }
 
 @media (min-width: 769px) {
-  .mob-bar {
+  .mob-bottom-bar {
     display: none !important;
   }
 }
