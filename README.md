@@ -6,6 +6,8 @@
 
 A fast, production-ready, client-side-only PDF editor built with **React**, **Vite**, **PDF.js**, and **pdf-lib**. 
 
+🚀 **[Live Demo](https://pdf-editor-lac-alpha.vercel.app)**
+
 ## Features
 
 - **100% Client-Side Privacy:** Your files never leave your device.
@@ -54,6 +56,16 @@ src/
 1. **Loading**: PDF.js renders the file. We intentionally clone the `ArrayBuffer` before letting PDF.js consume it so that way `pdf-lib` has access to the raw bytes for export later (PDF.js web workers detach ArrayBuffers).
 2. **Editing**: Annotations (text, highlights, drawing) are tracked in React state and rendered as transparent, interactable HTML elements floating *above* the PDF.js canvas.
 3. **Exporting**: When clicking Download, `pdf-lib` is fed the raw bytes, embeds the annotations securely into the PDF tree, snipes out the deleted pages, and exports an optimized Blob.
+
+## CI/CD Pipeline & Deployment
+
+This project uses **GitHub Actions** for CI/CD to automatically build and deploy the app to Vercel whenever changes are pushed or merged into the `main` branch. 
+
+To deploy this yourself:
+1. Fork or clone this repository
+2. Link the repository to your Vercel account
+3. Ensure Vercel is set to build a **Vite** project (`npm run build`)
+4. Any pushes to `main` will now auto-deploy to your Vercel instance 
 
 ---
 
